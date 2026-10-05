@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sharelink Personal Tool</title>
-<meta name="description" content="토스쇼핑 쉐어링크 상품 정보를 활용하여 개인 SNS 및 콘텐츠 채널에 게시할 상품 소개 콘텐츠를 제작하기 위한 개인용 개발 프로젝트입니다.">
+<title>LinkStudio Lab</title>
+<meta name="description" content="LinkStudio Lab은 토스쇼핑 쉐어링크, 쿠팡파트너스 등 제휴 플랫폼의 상품 정보를 활용하여 개인 SNS, 블로그 및 숏폼용 상품 소개 콘텐츠를 제작하는 개인용 콘텐츠 제작 도구입니다.">
 <style>
   :root {
     --blue: #3182f6;
+    --blue-soft: rgba(49, 130, 246, 0.08);
     --bg: #f2f4f6;
     --card: #ffffff;
     --text: #191f28;
@@ -22,29 +23,52 @@
     background: var(--bg);
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", sans-serif;
-    line-height: 1.6;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
-  main { max-width: 640px; margin: 0 auto; }
+  main { max-width: 680px; margin: 0 auto; }
   .card {
     background: var(--card);
-    border-radius: 20px;
+    border-radius: 22px;
     padding: 32px 28px;
     margin-bottom: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.025);
   }
+  .hero { padding-top: 36px; padding-bottom: 36px; }
   .badge {
     display: inline-block;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--blue);
     background: rgba(49, 130, 246, 0.1);
     border-radius: 999px;
-    padding: 5px 12px;
-    margin-bottom: 14px;
+    padding: 6px 12px;
+    margin-bottom: 16px;
   }
-  h1 { font-size: 28px; font-weight: 700; margin: 0 0 10px; letter-spacing: -0.02em; }
-  h2 { font-size: 17px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.01em; }
-  p { margin: 0 0 12px; color: var(--sub); font-size: 16px; }
+  h1 {
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0 0 8px;
+    letter-spacing: -0.03em;
+  }
+  .tagline {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 800;
+    margin: 0 0 14px;
+    letter-spacing: -0.015em;
+  }
+  p {
+    margin: 0 0 12px;
+    color: var(--sub);
+    font-size: 16px;
+  }
   p:last-child { margin-bottom: 0; }
   .lead { font-size: 16px; color: var(--sub); }
   ul { margin: 0; padding: 0; list-style: none; }
@@ -59,62 +83,138 @@
   li::before {
     content: "";
     position: absolute;
-    left: 6px; top: 20px;
-    width: 5px; height: 5px;
+    left: 6px;
+    top: 20px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: var(--blue);
   }
-  .notice {
-    background: rgba(49, 130, 246, 0.06);
+  .platforms {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .platform {
+    border: 1px solid var(--line);
     border-radius: 14px;
-    padding: 16px 18px;
+    padding: 16px;
+    color: var(--text);
+    font-weight: 700;
+    background: #fff;
+  }
+  .platform small {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 13px;
+  }
+  .notice {
+    background: var(--blue-soft);
+    border-radius: 14px;
+    padding: 17px 18px;
     font-size: 15px;
     color: var(--sub);
   }
-  a { color: var(--blue); text-decoration: none; font-weight: 600; }
+  .channel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 15px 16px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    margin-top: 8px;
+  }
+  .channel strong { font-size: 16px; }
+  .channel span { color: var(--muted); font-size: 14px; }
+  a { color: var(--blue); text-decoration: none; font-weight: 700; }
   a:hover { text-decoration: underline; }
-  footer { text-align: center; color: var(--muted); font-size: 13px; padding-top: 12px; }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding-top: 14px;
+  }
   @media (max-width: 480px) {
     body { padding: 24px 12px 48px; }
-    .card { padding: 24px 20px; border-radius: 16px; }
-    h1 { font-size: 24px; }
+    .card { padding: 24px 20px; border-radius: 18px; }
+    h1 { font-size: 27px; }
+    .tagline { font-size: 17px; }
+    .platforms { grid-template-columns: 1fr; }
+    .channel { align-items: flex-start; flex-direction: column; }
   }
 </style>
 </head>
 <body>
 <main>
-  <section class="card">
-    <span class="badge">개인용 프로젝트</span>
-    <h1>Sharelink Personal Tool</h1>
-    <p class="lead">토스쇼핑 쉐어링크 상품 정보를 활용하여 개인 SNS 및 콘텐츠 채널에 게시할 상품 소개 콘텐츠를 제작하기 위한 개인용 개발 프로젝트입니다.</p>
+  <section class="card hero">
+    <span class="badge">Personal Content Automation Project</span>
+    <h1>LinkStudio Lab</h1>
+    <p class="tagline">좋은 제품을 더 좋은 이야기로.</p>
+    <p class="lead">다양한 제휴 쇼핑 플랫폼의 상품 정보를 활용하여 개인 SNS, 블로그 및 숏폼 채널에 게시할 상품 소개 콘텐츠를 제작하기 위한 개인용 콘텐츠 제작 도구입니다.</p>
   </section>
 
   <section class="card">
     <h2>프로젝트 목적</h2>
-    <p>토스쇼핑 Open API를 통해 상품 정보를 조회한 뒤 해당 정보를 기반으로 SNS 게시글, 상품 소개 문구, 숏폼 콘텐츠 초안 등을 작성하는 데 활용합니다.</p>
+    <p>토스쇼핑 쉐어링크, 쿠팡파트너스 등 제휴 플랫폼에서 제공되는 상품 정보를 바탕으로 상품 소개 문구, SNS 게시글, 블로그 콘텐츠, 숏폼 영상 대본 및 자막 등을 제작하고 개인 채널에 게시하는 용도로 사용합니다.</p>
   </section>
 
   <section class="card">
-    <h2>주요 기능</h2>
+    <h2>주요 활용</h2>
     <ul>
-      <li>토스쇼핑 상품 정보를 활용한 콘텐츠 작성</li>
-      <li>SNS 및 블로그용 상품 소개 문구 생성</li>
-      <li>숏폼 영상용 대본 및 자막 초안 생성</li>
-      <li>채널별 게시 콘텐츠 작성 보조</li>
-      <li>게시 콘텐츠 및 게시 이력 관리</li>
+      <li>제휴 상품을 활용한 SNS 게시글 작성</li>
+      <li>블로그용 상품 소개 콘텐츠 제작</li>
+      <li>숏폼 영상용 대본 및 자막 생성</li>
+      <li>상품별 콘텐츠 미리보기 및 편집</li>
+      <li>개인 채널 게시 및 게시 이력 관리</li>
     </ul>
   </section>
 
   <section class="card">
-    <h2>이용 범위</h2>
-    <p>본 프로젝트는 외부 사용자에게 상품을 검색하거나 카테고리별로 전시하는 쇼핑몰 형태의 서비스가 아닙니다.</p>
-    <p>Open API를 통해 제공받은 상품·가격 정보를 별도의 상품 데이터베이스로 축적하거나 상품 검색·가격 비교·상품 전시 목적으로 사용하지 않습니다.</p>
-    <p>API로 조회한 상품 정보는 콘텐츠 제작에 활용하며, 개인적인 SNS 및 콘텐츠 게시 자동화 목적으로 사용할 예정입니다.</p>
+    <h2>연동 플랫폼</h2>
+    <div class="platforms">
+      <div class="platform">
+        Toss Shopping Sharelink
+        <small>상품 소개 콘텐츠 및 쉐어링크 활용</small>
+      </div>
+      <div class="platform">
+        Coupang Partners
+        <small>제휴 상품 콘텐츠 및 파트너스 링크 활용</small>
+      </div>
+    </div>
   </section>
 
   <section class="card">
-    <h2>안내</h2>
-    <p class="notice">현재 개발 초기 단계이며, 토스쇼핑 Open API 이용 정책과 관련 가이드를 준수하여 사용할 예정입니다.</p>
+    <h2>콘텐츠 노출 방식</h2>
+    <p>생성된 콘텐츠는 개인이 운영하는 Instagram, 블로그, 숏폼 및 기타 SNS 채널에 게시합니다.</p>
+    <p>각 콘텐츠에는 상품 소개와 함께 해당 제휴 플랫폼의 링크를 포함하여 사용자가 공식 상품 상세 페이지로 이동할 수 있도록 제공합니다.</p>
+    <p>제휴 콘텐츠에는 각 플랫폼의 운영 정책에 따라 경제적 이해관계 및 제휴 활동 관련 안내 문구를 함께 표시합니다.</p>
+  </section>
+
+  <section class="card">
+    <h2>운영 범위 및 데이터 이용</h2>
+    <p>LinkStudio Lab은 별도의 쇼핑몰, 상품 검색 서비스 또는 가격 비교 서비스를 운영하지 않습니다.</p>
+    <p>제휴 플랫폼을 통해 제공받은 상품·가격 정보를 독립적인 상품 데이터베이스로 축적하거나 여러 쇼핑몰의 상품 및 가격을 비교·전시하는 목적으로 사용하지 않습니다.</p>
+    <p>상품 정보는 콘텐츠 제작 및 게시를 위한 용도로 활용합니다.</p>
+  </section>
+
+  <section class="card">
+    <h2>운영 채널</h2>
+    <div class="channel">
+      <div>
+        <strong>Instagram</strong><br>
+        <span>상품 소개 및 숏폼 콘텐츠 게시</span>
+      </div>
+      <a href="https://www.instagram.com/linkstudio.lab/" target="_blank" rel="noopener noreferrer">@linkstudio.lab</a>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>운영 안내</h2>
+    <p class="notice">현재 개인용 콘텐츠 제작 및 게시 자동화 도구로 개발 중이며, 각 제휴 플랫폼의 API 이용 정책, 제휴 운영 정책 및 광고 표시 가이드를 준수하여 운영할 예정입니다.</p>
   </section>
 
   <section class="card">
@@ -122,7 +222,7 @@
     <p><a href="mailto:babydoolly@kakao.com">babydoolly@kakao.com</a></p>
   </section>
 
-  <footer>Sharelink Personal Tool</footer>
+  <footer>LinkStudio Lab · linkstudio.lab</footer>
 </main>
 </body>
 </html>
